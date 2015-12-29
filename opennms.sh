@@ -51,9 +51,9 @@ yum -y install postgresql postgresql-server
 
 echo " Changing ident to trust "
 
-sed 's/ident/trust/g' /var/lib/pgsql/9.4/data/pg_hba.conf
+sed 's/ident/trust/g' /var/lib/pgsql/data/pg_hba.conf
 
-sed 's/ident/peer/g' /var/lib/pgsql/9.4/data/pg_hba.conf
+sed 's/ident/peer/g' /var/lib/pgsql/data/pg_hba.conf
 
 echo " restarting postgresql"
 /sbin/service postgresql restart
