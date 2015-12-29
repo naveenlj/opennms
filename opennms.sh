@@ -2,6 +2,11 @@
 # opennms installation on centos7
  set -x
  
+ if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
 which curl >/dev/null 2>&1
 if  [ $? != 0 ]; then
  yum -y install curl >/dev/null 2>&1
