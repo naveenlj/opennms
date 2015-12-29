@@ -1,5 +1,17 @@
 #/bin/bash
 # opennms installation on centos7
+ set -x
+ 
+which curl >/dev/null 2>&1
+if  [ $? != 0 ]; then
+ yum -y install curl >/dev/null 2>&1
+fi
+
+# Install wget if not already installed 
+which wget >/dev/null 2>&1
+if  [ $? != 0 ]; then
+ yum -y install wget >/dev/null 2>&1
+fi
 
 rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-snapshot-rhel7.noarch.rpm
  
