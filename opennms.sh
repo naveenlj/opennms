@@ -28,8 +28,12 @@ yum_makecache_retry() {
   done
 }
 
+echo " Adding opennms repo "
+
 rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-snapshot-rhel7.noarch.rpm
- 
+
+echo " Install postgresql"
+
 yum -y install postgresql postgresql-server
  
 /sbin/service postgresql start
@@ -45,13 +49,20 @@ yum -y install postgresql postgresql-server
 #host    all         all         127.0.0.1/32          trust
 #host    all         all         ::1/128               trust
 
+echo " Changing ident to trust "
+
 sed 's/ident/trust/g' /var/lib/pgsql/9.4/data/pg_hba.conf
 
 sed 's/ident/peer/g' /var/lib/pgsql/9.4/data/pg_hba.conf
 
+echo " restarting postgresql"
 /sbin/service postgresql restart
 
+echo " installing java 1.7 "
+
 yum -y install java-1.7.0-openjdk-devel
+
+echo " Installing opennms "
 
 yum -y install opennms
 
@@ -59,15 +70,22 @@ yum -y install opennms
 
 /opt/opennms/bin/install -dis
 
+echo " installing iplike "
 yum -y install iplike
+
+echo " adding firewall rule "
 
 firewall-cmd --permanent --add-port=8980/tcp
 
 firewall-cmd --reload
 
+echo " Starting opennms "
+
 systemctl start opennms
 
 systemctl enable opennms
+
+sleep 5
 
 curl -i localhost:8980
 
