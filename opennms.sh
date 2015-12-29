@@ -44,18 +44,14 @@ yum -y install postgresql postgresql-server
  
 /sbin/chkconfig postgresql on
 
-# Need to change from ident to trust on  pg_hba.conf file   
-#local   all         all                               trust
-#host    all         all         127.0.0.1/32          trust
-#host    all         all         ::1/128               trust
-
 echo " Changing ident to trust "
 
-sed 's/ident/trust/g' /var/lib/pgsql/data/pg_hba.conf
-
-sed 's/ident/peer/g' /var/lib/pgsql/data/pg_hba.conf
+echo 'local   all         all                               trust
+host    all         all         127.0.0.1/32          trust
+host    all         all         ::1/128               trust' | tee /var/lib/pgsql/data/pg_hba.conf
 
 echo " restarting postgresql"
+
 /sbin/service postgresql restart
 
 echo " installing java 1.7 "
