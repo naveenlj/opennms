@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # opennms installation on centos7
  set -x
  
