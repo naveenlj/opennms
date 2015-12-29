@@ -1,9 +1,10 @@
 #/bin/bash
+# opennms installation on centos7
 
 rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-snapshot-rhel7.noarch.rpm
  
 yum install postgresql postgresql-server
-  
+ 
 /sbin/service postgresql start
  
 /sbin/service postgresql initdb
@@ -21,11 +22,11 @@ sed 's/ident/trust/g' /var/lib/pgsql/9.4/data/pg_hba.conf
 
 sed 's/ident/peer/g' /var/lib/pgsql/9.4/data/pg_hba.conf
 
- /sbin/service postgresql restart
+/sbin/service postgresql restart
 
 yum install java-1.7.0-openjdk-devel
 
- yum -y install opennms
+yum -y install opennms
 
 /opt/opennms/bin/runjava -S /usr/java/latest/bin/java
 
@@ -34,10 +35,13 @@ yum install java-1.7.0-openjdk-devel
 yum -y install iplike
 
 firewall-cmd --permanent --add-port=8980/tcp
+
 firewall-cmd --reload
 
 systemctl start opennms
+
 systemctl enable opennms
 
+curl -i localhost:8980
 
 
