@@ -17,6 +17,10 @@ yum install postgresql postgresql-server
 #host    all         all         127.0.0.1/32          trust
 #host    all         all         ::1/128               trust
 
+sed 's/ident/trust/g' /var/lib/pgsql/9.4/data/pg_hba.conf
+
+sed 's/ident/peer/g' /var/lib/pgsql/9.4/data/pg_hba.conf
+
  /sbin/service postgresql restart
 
 yum install java-1.7.0-openjdk-devel
