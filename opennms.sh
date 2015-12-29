@@ -1,6 +1,6 @@
 #/bin/bash
 
-rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-RELEASE-DISTRIBUTION.noarch.rpm
+rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-snapshot-rhel7.noarch.rpm
  
 yum install postgresql postgresql-server
   
