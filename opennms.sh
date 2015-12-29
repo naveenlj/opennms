@@ -13,9 +13,19 @@ if  [ $? != 0 ]; then
  yum -y install wget >/dev/null 2>&1
 fi
 
+yum_makecache_retry() {
+  tries=0
+  until [ $tries -ge 5 ]
+  do
+    yum makecache && break
+    let tries++
+    sleep 1
+  done
+}
+
 rpm -Uvh https://yum.opennms.org/repofiles/opennms-repo-snapshot-rhel7.noarch.rpm
  
-yum install postgresql postgresql-server
+yum -y install postgresql postgresql-server
  
 /sbin/service postgresql start
  
