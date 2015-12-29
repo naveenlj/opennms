@@ -51,7 +51,7 @@ sed 's/ident/peer/g' /var/lib/pgsql/9.4/data/pg_hba.conf
 
 /sbin/service postgresql restart
 
-yum install java-1.7.0-openjdk-devel
+yum -y install java-1.7.0-openjdk-devel
 
 yum -y install opennms
 
