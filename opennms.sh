@@ -40,8 +40,6 @@ yum -y install postgresql postgresql-server
  
 /sbin/service postgresql initdb
 
-/sbin/service postgresql start
- 
 /sbin/chkconfig postgresql on
 
 echo " Changing ident to trust "
@@ -67,6 +65,7 @@ yum -y install opennms
 /opt/opennms/bin/install -dis
 
 echo " installing iplike "
+
 yum -y install iplike
 
 echo " adding firewall rule "
